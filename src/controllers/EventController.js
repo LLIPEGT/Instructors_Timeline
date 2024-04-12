@@ -25,7 +25,7 @@ class EventController{
 
     async listEvent(req,res){
        const eventRoom = await eventListService.execute()
-       return res.status(200).json(eventRoom)
+       return res.status(200).json({eventRoom})
     }
 
     async listEventById(req,res){
