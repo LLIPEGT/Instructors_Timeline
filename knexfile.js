@@ -1,13 +1,13 @@
-const path = require("path")
+const path = require ("path")
 
 module.exports = {
-  development: {
+  development:{
     client: 'mysql2',
     connection: {
       host: 'localhost',
       user: 'root',
       password: '',
-      database: 'instructors_timeline'
+      database: 'instructor_timeline'
     },
     migrations: {
       directory: path.resolve(

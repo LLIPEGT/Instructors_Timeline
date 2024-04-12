@@ -1,10 +1,19 @@
 const {Router} = require("express")
-const AdmController = require("../controller/AdmController")
-const admRoute = Router()
+
+const AdmController = require("../controllers/AdmController")
+const checkAdmExist = require("../middlewares/checkAdmExists")
+const ensureAuthenticatedAdm = require("../middlewares/ensureAuthenticatedAdm")
+
+
+const admRoutes = Router()
 const admController = new AdmController()
 
-admRoute.post("/", admController.create)
-admRoute.get("/", admController.list)
-admRoute.get("/:admId", admController.listId)
 
-module.exports = admRoute
+admRoutes.post("/adm", admController.createAdm)
+admRoutes.use(ensureAuthenticatedAdm)
+admRoutes.get("/adm", admController.listAdm)
+admRoutes.get("/adm/:adm_id",  checkAdmExist,admController.listAdmById)
+admRoutes.patch("/adm/:adm_id", checkAdmExist, admController.updateAdm)
+admRoutes.delete("/adm/:adm_id", checkAdmExist, admController.deleteAdm)
+
+module.exports = admRoutes
